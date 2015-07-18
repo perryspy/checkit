@@ -1,0 +1,19 @@
+{
+  "name": "checkit",
+  "version": "1.0.0",
+  "description": "a simple check list",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "lodash": "^3.10.0",
+    "method-override": "^2.3.4",
+    "mongoose": "^4.0.7",
+    "morgan": "^1.6.1"
+  }
+}

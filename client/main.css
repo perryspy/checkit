@@ -1,0 +1,18 @@
+.note {
+	padding: 1em;
+	margin: 1em;
+}
+
+.message{
+	padding-left: 0.5em;
+	font-size: 2em;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.strike{
+	text-decoration: line-through;
+}
+
+.right {
+	float: right;
+}
