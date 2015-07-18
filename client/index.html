@@ -13,17 +13,17 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 
-		<div class="page-header">
-			<h1>CheckIt</h1>
-		</div>
+  		<div class="page-header">
+  			<h1>CheckIt</h1>
+  		</div>
 
-		<div ng-repeat="note in notes" class="list-group">
-			<div class="note list-group-item">
-				<span><input type="checkbox" ng-model="note.checked"></span>
-        <span class="message" ng-class="{strike: note.checked}">{{note.message}}</span>
-				<span class="glyphicon glyphicon-remove right" ng-click="deleteNote($index)"></span>
-			</div>
-		</div>
+      <div class="list-group">
+    		<div ng-repeat="note in notes" class="list-group-item">
+  				<span><input type="checkbox" ng-model="note.checked"></span>
+          <span class="message" ng-class="{'strike text-muted': note.checked}">{{note.message}}</span>
+  				<span class="glyphicon glyphicon-remove right" ng-click="deleteNote($index)"></span>
+    		</div>
+      </div>
 
       <form ng-submit="addNote()">
         <input type="text" class="form-control" placeholder="Add a new note" ng-model="msg">
