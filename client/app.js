@@ -1,25 +1,51 @@
 var app = angular.module('checkit', []);
 
 app.controller('CheckitCtrl', [
-    '$scope',
-    function($scope) {
-        $scope.notes = [
-            {message: 'herp', checked: false},
-            {message: 'derp', checked: true}
-        ];
+    '$scope', '$http',
+    function($scope, $http) {
         
-        $scope.addNote = function() {
+        $scope.getNotes = function() {
+            $http.get('/api/notes')
+                .success(function(data) {
+                    console.log(data);
+                    $scope.notes = data;
+                }
+            );
+        }
+        
+        $scope.createNote = function() {
             if($scope.msg) {
-                $scope.notes.push({
+                $http.post('/api/notes', {
                     message: $scope.msg,
                     checked: false
-                });
-                $scope.msg = "";
+                    }).success(function() {
+                        $scope.msg = "";
+                        $scope.getNotes();
+                    }
+                );
             }
         }
         
         $scope.deleteNote = function(index) {
-            $scope.notes.splice(index, 1);
+            if($scope.notes[index]) {
+                $http.delete('/api/notes/' + $scope.notes[index]._id)
+                    .success(function() {
+                        $scope.getNotes();
+                    }
+                );
+            }
         }
+        
+        $scope.checkMessage = function(index) {
+            if($scope.notes[index]) {
+                $http.put('/api/notes/' + $scope.notes[index]._id, $scope.notes[index])
+                    .success(function() {
+                        $scope.getNotes();
+                    }
+                );
+            }
+        }
+        
+        $scope.getNotes();
     }
 ]);

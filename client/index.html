@@ -19,13 +19,17 @@
 
       <div class="list-group">
     		<div ng-repeat="note in notes" class="list-group-item">
-  				<span><input type="checkbox" ng-model="note.checked"></span>
-          <span class="message" ng-class="{'strike text-muted': note.checked}">{{note.message}}</span>
-  				<span class="glyphicon glyphicon-remove right" ng-click="deleteNote($index)"></span>
+  				<span><input type="checkbox" ng-model="note.checked" ng-click="checkMessage($index)"></span>
+      		<span class="message" ng-class="{'strike text-muted': note.checked}">
+            {{note.message}}
+          </span>
+  				<span class="right" ng-click="deleteNote($index)">
+            <button class="glyphicon glyphicon-remove"></button>
+          </span>
     		</div>
       </div>
 
-      <form ng-submit="addNote()">
+      <form ng-submit="createNote()">
         <input type="text" class="form-control" placeholder="Add a new note" ng-model="msg">
       </form>
 
