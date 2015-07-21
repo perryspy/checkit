@@ -11,7 +11,7 @@ app.controller('CheckitCtrl', [
                     $scope.notes = data;
                 }
             );
-        }
+        };
         
         $scope.createNote = function() {
             if($scope.msg) {
@@ -24,7 +24,7 @@ app.controller('CheckitCtrl', [
                     }
                 );
             }
-        }
+        };
         
         $scope.deleteNote = function(index) {
             if($scope.notes[index]) {
@@ -34,7 +34,7 @@ app.controller('CheckitCtrl', [
                     }
                 );
             }
-        }
+        };
         
         $scope.checkMessage = function(index) {
             if($scope.notes[index]) {
@@ -44,7 +44,7 @@ app.controller('CheckitCtrl', [
                     }
                 );
             }
-        }
+        };
         
         $scope.getNotes();
     }
