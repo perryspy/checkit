@@ -1,6 +1,4 @@
 .note {
-	padding: 1em;
-	margin: 1em;
 }
 
 .message{
@@ -15,4 +13,12 @@
 
 .right {
 	float: right;
+}
+
+.delete-note-button {
+	display: none;
+}
+
+.note:hover .delete-note-button {
+	display: block;
 }
