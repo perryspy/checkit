@@ -1,51 +1,71 @@
-var app = angular.module('checkit', []);
+var app = angular.module('checkit', ['ngResource']);
 
 app.controller('CheckitCtrl', [
-    '$scope', '$http',
-    function($scope, $http) {
+    '$scope', '$http', 'Note',
+    function($scope, $http, Note) {
         
         $scope.getNotes = function() {
-            $http.get('/api/notes')
-                .success(function(data) {
-                    console.log(data);
-                    $scope.notes = data;
-                }
-            );
+            $scope.notes = Note.query();
         };
         
         $scope.createNote = function() {
-            if($scope.msg) {
-                $http.post('/api/notes', {
-                    message: $scope.msg,
-                    checked: false
-                    }).success(function() {
-                        $scope.msg = "";
-                        $scope.getNotes();
-                    }
-                );
-            }
+            // Create a new instance of the Resource
+            var note = new Note({
+                message: $scope.msg,
+                checked: false
+            });
+
+            // use the resource save function
+            note.$save(function(response) {
+                // Redirect after save
+                //$location.path('notes/' + response._id);
+
+                // Clear form fields
+                $scope.msg = '';
+
+                $scope.notes.push(note);
+            }, function(errorResponse) {
+                console.log('error creating note', errorResponse);
+            });
         };
-        
-        $scope.deleteNote = function(index) {
-            if($scope.notes[index]) {
-                $http.delete('/api/notes/' + $scope.notes[index]._id)
-                    .success(function() {
-                        $scope.getNotes();
-                    }
-                );
-            }
+
+        $scope.getNote = function() {
+            //$scope.note = Note.get({
+            //    noteId: $stateParams.categoryId
+            //});
         };
-        
-        $scope.checkMessage = function(index) {
-            if($scope.notes[index]) {
-                $http.put('/api/notes/' + $scope.notes[index]._id, $scope.notes[index])
-                    .success(function() {
-                        $scope.getNotes();
-                    }
-                );
-            }
+
+        $scope.updateNote= function(note) {
+            note.$update(function(response) {
+
+            }, function(errorResponse) {
+
+            });
         };
-        
-        $scope.getNotes();
+
+        $scope.deleteNote = function(note) {
+            note.$remove(function(response) {
+                // remove it from our local collection
+                for (var i in $scope.notes) {
+                    if ($scope.notes [i] === note) {
+                        $scope.notes.splice(i, 1);
+                    }
+                }
+            }, function(errorResponse) {
+            });
+        };
+
+
     }
 ]);
+
+app.factory('Note', [
+    '$resource',
+    function($resource) {
+        return $resource('/api/notes/:noteId',
+          { noteId: '@_id'},
+          { 'update': {method: 'PUT'} }
+        );
+    }
+]);
+
