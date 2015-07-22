@@ -4,16 +4,6 @@ var gulp = require('gulp'),
 
 var exec = require('child_process').exec;
 
-function runCommand(command) {
-  return function (cb) {
-    exec(command, function (err, stdout, stderr) {
-      console.log(stdout);
-      console.log(stderr);
-      cb(err);
-    });
-  }
-}
-
 gulp.task('default', ['build-js', 'build-css', 'server', 'watch']);
 
 gulp.task('jslint' , function() {
