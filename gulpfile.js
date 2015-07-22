@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 
 var exec = require('child_process').exec;
 
-gulp.task('default', ['build-js', 'build-css', 'server', 'watch']);
+gulp.task('default', ['build-js', 'build-css', 'watch']);
 
 gulp.task('jslint' , function() {
   return gulp.src('client/js/**/*.js')

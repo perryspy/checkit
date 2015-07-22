@@ -1,4 +1,4 @@
-var app = angular.module('checkit', ['ngResource']);
+var app = angular.module('checkit');
 
 app.controller('CheckitCtrl', [
     '$scope', '$http', 'Note',
@@ -58,14 +58,3 @@ app.controller('CheckitCtrl', [
 
     }
 ]);
-
-app.factory('Note', [
-    '$resource',
-    function($resource) {
-        return $resource('/api/notes/:noteId',
-          { noteId: '@_id'},
-          { 'update': {method: 'PUT'} }
-        );
-    }
-]);
-
