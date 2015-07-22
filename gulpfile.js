@@ -47,13 +47,13 @@ gulp.task('server', function (cb) {
   exec('mongod', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
-    cb(err);
+    throw err;
   });
 
   exec('nodemon server.js', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
-    cb(err);
+    throw err;
   });
 
   var port = process.env.PORT || 1337;
