@@ -1,5 +1,5 @@
 module.exports = function(app) {
-	var NoteController = require('./notes.server.controller');
+	var NoteController = require('./controllers/notes.server.controller');
 
 	app.route('/api/notes')
 		.get(NoteController.list)
