@@ -16,10 +16,14 @@ function runCommand(command) {
 
 gulp.task('default', ['build-js', 'build-css', 'server', 'watch']);
 
-gulp.task('build-js', function() {
+gulp.task('jslint' , function() {
   return gulp.src('client/js/**/*.js')
     .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter('jshint-stylish'))
+    .pipe(plugins.jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('build-js', ['jslint'], function() {
+  return gulp.src('client/js/**/*.js')
     .pipe(plugins.sourcemaps.init())  // process the original sources
       .pipe(plugins.concat('scripts.min.js'))
       .pipe(gutil.env.type === 'production' ? plugins.ugilify() : gutil.noop())
@@ -27,7 +31,13 @@ gulp.task('build-js', function() {
     .pipe(gulp.dest('client'));
 });
 
-gulp.task('build-css', function() {
+gulp.task('csslint', function() {
+  return gulp.src('client/css/**/*.css')
+    .pipe(plugins.csslint())
+    .pipe(plugins.csslint.reporter());
+});
+
+gulp.task('build-css', ['csslint'], function() {
   return gulp.src('client/css/**/*.css')
     .pipe(plugins.sourcemaps.init())  // process the original sources
       .pipe(plugins.concatCss('main.min.css'))
@@ -35,6 +45,8 @@ gulp.task('build-css', function() {
     .pipe(plugins.sourcemaps.write())  // add the map to modified source
     .pipe(gulp.dest('client')).on('error', gutil.log);
 });
+
+gulp.task('lint', ['csslint', 'jslint']);
 
 gulp.task('watch', function() {
   gulp.watch('client/js/**/*.js', ['build-js']);
