@@ -1,4 +1,5 @@
 .note {
+	
 }
 
 .message{
@@ -11,8 +12,16 @@
 	text-decoration: line-through;
 }
 
+.inline {
+	display: inline;
+}
+
 .right {
 	float: right;
+}
+
+.left {
+	float: left;
 }
 
 .delete-note-button {
