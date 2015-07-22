@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>CheckIt</title>
   <link rel="stylesheet" type="text/css" href="lib/bootstrap-css-only/css/bootstrap.min.css">
-  <link href="main.css" rel="stylesheet">
+  <link href="main.min.css" rel="stylesheet">
 </head>
 <body ng-app="checkit" ng-controller="CheckitCtrl" ng-init="getNotes()">
 	<div class="row">
@@ -16,13 +16,13 @@
   		</div>
 
       <div class="list-group">
-    		<div ng-repeat="note in notes" class="list-group-item">
+    		<div ng-repeat="note in notes" class="list-group-item note">
   				<span><input type="checkbox" ng-model="note.checked" ng-click="updateNote(note)"></span>
       		<span class="message" ng-class="{'strike text-muted': note.checked}">
             {{note.message}}
           </span>
   				<span class="right" ng-click="deleteNote(note)">
-            <button class="glyphicon glyphicon-remove"></button>
+            <button class="glyphicon glyphicon-remove delete-note-button"></button>
           </span>
     		</div>
       </div>
@@ -36,6 +36,6 @@
 
   <script type="text/javascript" src="lib/angular/angular.js"></script>
   <script type="text/javascript" src="lib/angular-resource/angular-resource.js"></script>
-  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="scripts.min.js"></script>
 </body>
 </html>
