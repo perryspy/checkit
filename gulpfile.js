@@ -2,7 +2,19 @@ var gulp = require('gulp'),
   gutil   = require('gulp-util'),
   plugins = require('gulp-load-plugins')();
 
-gulp.task('default', ['build-js', 'build-css', 'watch']);
+var exec = require('child_process').exec;
+
+function runCommand(command) {
+  return function (cb) {
+    exec(command, function (err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
+      cb(err);
+    });
+  }
+}
+
+gulp.task('default', ['build-js', 'build-css', 'server', 'watch']);
 
 gulp.task('build-js', function() {
   return gulp.src('client/js/**/*.js')
@@ -28,3 +40,21 @@ gulp.task('watch', function() {
   gulp.watch('client/js/**/*.js', ['build-js']);
   gulp.watch('client/css/**/*.css', ['build-css']);
 });
+
+gulp.task('server', function (cb) {
+  exec('mongod', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+
+  exec('nodemon server.js', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+
+  var port = process.env.PORT || 1337;
+  console.log('App listening on port ' + port);
+});
+
