@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 
 var exec = require('child_process').exec;
 
-gulp.task('default', ['build-js', 'build-css', 'watch']);
+gulp.task('default', ['build-js', 'build-css']);
 
 gulp.task('jslint' , function() {
   return gulp.src('client/js/**/*.js')
@@ -59,4 +59,3 @@ gulp.task('server', function (cb) {
   var port = process.env.PORT || 1337;
   console.log('App listening on port ' + port);
 });
-
