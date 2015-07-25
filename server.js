@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var methodOverride = require('method-override');
 app.use(methodOverride());
 
-require('./server/routes.js')(app);
+require('./server/config/routes.js')(app);
 
 var port = process.env.PORT || 1337;
 app.listen(port);
