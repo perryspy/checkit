@@ -22,6 +22,21 @@ I'll link any links I found useful, plus any lessons learned.
 > Added auth middleware to the server routes that required it. This is standard  
 > On the Angular side, they use a combo of  
 > - $httpProvider.interceptors.push - checks if the response status is 401, if it is it routes to the login page  
+```javascript
+$httpProvider.interceptors.push(function($q, $location) { 
+      return {
+            response: function(response) { 
+                  // do something on success 
+                  return response; 
+            }, 
+            responseError: function(response) { 
+                  if (response.status === 401) 
+                        $location.url('/login'); 
+                  return $q.reject(response); 
+            } 
+      }; 
+});
+```
 > - created a function to checkLoggedin. Then to secure a URL, we simply add this new function to the configuration of the route.  
 
 ```javascript
