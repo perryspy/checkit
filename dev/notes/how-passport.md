@@ -38,7 +38,6 @@ $httpProvider.interceptors.push(function($q, $location) {
 });
 ```
 > - created a function to checkLoggedin. Then to secure a URL, we simply add this new function to the configuration of the route.  
-
 ```javascript
 $routeProvider  
       .when('/', {  
