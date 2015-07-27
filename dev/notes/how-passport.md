@@ -18,11 +18,14 @@ I'll link any links I found useful, plus any lessons learned.
 > So the server AND the client have to keep track of the authenticated state. However, even if someone changes the client's state, the most they'll do is receive empty templates with no data. That's the gotcha with client thick apps, is that you have to keep track of state on the client side too.  
 
 - [VickeV - authentication-in-single-page-applications-node-js-passportjs-angularjs](https://vickev.com/#!/article/authentication-in-single-page-applications-node-js-passportjs-angularjs)
+
 > Added auth middleware to the server routes that required it. This is standard  
 > On the Angular side, they use a combo of  
 > - $httpProvider.interceptors.push - checks if the response status is 401, if it is it routes to the login page  
 > - created a function to checkLoggedin. Then to secure a URL, we simply add this new function to the configuration of the route.  
-> > `$routeProvider  
+
+```javascript
+$routeProvider  
       .when('/', {  
         templateUrl: '/views/main.html'  
       })  
@@ -32,7 +35,9 @@ I'll link any links I found useful, plus any lessons learned.
         resolve: {  
           loggedin: checkLoggedin  
         }  
-      });`  
+      }
+);
+```  
 
 - [scotch.io - easy-node-authentication (missing how to connect AngularJS with this)](https://scotch.io/courses/easy-node-authentication)
 - [thinkster.io - mean-stack-tutorial (section on Passport)](https://thinkster.io/mean-stack-tutorial/)
