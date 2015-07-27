@@ -7,7 +7,8 @@ side.
 I'll link any links I found useful, plus any lessons learned.
 
 ### Links
-- [Reddit - angularjs-authentication-with-passport](https://www.reddit.com/r/angularjs/comments/2fsh6b/angularjs_authentication_with_passport/)
+- [Reddit - angularjs-authentication-with-passport](https://www.reddit.com/r/angularjs/comments/2fsh6b/angularjs_authentication_with_passport/)  
+
 > #### The way that I do it with passport is this: ####
 > - Express / Passport keeps track of the authenticated state on the server / datastore.  
 - Once a user "logs in" Angular keeps track of the logged in state locally, via cookie / localstorage whichever.  
