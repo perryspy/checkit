@@ -1,4 +1,4 @@
-var module = angular.module('user', []);
+var module = angular.module('user');
 
 module.controller('UserController', [
   '$scope', '$state', 'UserService',
@@ -21,7 +21,7 @@ module.controller('UserController', [
           $scope.error = error;
         })
         .then(function() {
-          $state.go('checkit')
+          $state.go('checkit');
         });
     };
   }

@@ -1,4 +1,5 @@
-var app = angular.module('checkit', ['ngResource', 'ui.router']);
+var app = angular.module('checkit',
+  ['ngResource', 'ui.router']);
 
 app.config([
   '$stateProvider', '$urlRouterProvider',
@@ -8,10 +9,9 @@ app.config([
     $stateProvider
       .state('checkit', {
         url: '/checkit',
-        templateUrl: 'partials/checkit.html',
+        templateUrl: 'modules/note/templates/checkit.html',
         controller: 'CheckitCtrl'
-      })
-    ;
+      });
 
     $urlRouterProvider.otherwise(defaultRoute);
   }

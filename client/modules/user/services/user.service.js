@@ -1,4 +1,4 @@
-var module = angular.module('user', []);
+var module = angular.module('user');
 
 module.factory('UserService', [
   '$http', '$window',
@@ -43,7 +43,7 @@ module.factory('UserService', [
 
         return payload.username;
       }
-    }
+    };
 
     service.register = function(user) {
       return $http.post('/api/register', user)
@@ -52,11 +52,11 @@ module.factory('UserService', [
         });
     };
 
-    service.login = functiono(user) {
+    service.login = function(user) {
       return $http.post('/api/login', user)
         .success(function(response) {
           auth.saveToken(response.token);
-        })
+        });
     };
 
     service.logOut = function() {
