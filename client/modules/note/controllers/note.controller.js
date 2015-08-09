@@ -1,4 +1,4 @@
-var module = angular.module('checkit');
+var module = angular.module('note');
 
 module.controller('CheckitCtrl', [
     '$scope', '$http', 'Note',
