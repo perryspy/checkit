@@ -17,10 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var methodOverride = require('method-override');
 app.use(methodOverride());
 
-var passport = require('passport');
-require('./server/config/passport');
-app.use(passport.initialize());
-
 require('./server/config/routes.js')(app);
 
 var port = process.env.PORT || 1337;

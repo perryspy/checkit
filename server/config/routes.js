@@ -1,6 +1,5 @@
 module.exports = function(app) {
 	var NoteController = require('../controllers/notes.server.controller');
-	var UserController = require('../controllers/users.server.controller');
 
 	app.route('/api/notes')
 		.get(NoteController.list)
@@ -14,12 +13,6 @@ module.exports = function(app) {
 
 	app.param('noteId', NoteController.noteById);
 
-	app.route('/api/register')
-		.post(UserController.register);
-
-	app.route('/api/login')
-		.post(UserController.login);
-	
 	// if none of the other routes are matched, default route
 	app.get('*', function(req, res) {
 		res.sendFile('client/index.html');
