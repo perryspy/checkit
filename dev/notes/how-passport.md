@@ -1,8 +1,10 @@
 # How PassportJS was used
 
-I think I'm going to follow the Thinkster.io tutorial, which uses passport to
+> I've followed the example of the [Thinkster.io tutorial](https://thinkster.io/mean-stack-tutorial/), which uses passport to
 lock down the API on the server, and then JSON WebTokens for auth on the client
-side.
+side. Currently it only has passport local. Going to read through the [scotch.io tutorial](https://scotch.io/courses/easy-node-authentication) to figure out how to add oAuth from social networks
+
+---
 
 I'll link any links I found useful, plus any lessons learned.
 
@@ -23,18 +25,18 @@ I'll link any links I found useful, plus any lessons learned.
 > On the Angular side, they use a combo of  
 > - $httpProvider.interceptors.push - checks if the response status is 401, if it is it routes to the login page  
 ```javascript
-$httpProvider.interceptors.push(function($q, $location) { 
+$httpProvider.interceptors.push(function($q, $location) {
       return {
-            response: function(response) { 
-                  // do something on success 
-                  return response; 
-            }, 
-            responseError: function(response) { 
-                  if (response.status === 401) 
-                        $location.url('/login'); 
-                  return $q.reject(response); 
-            } 
-      }; 
+            response: function(response) {
+                  // do something on success
+                  return response;
+            },
+            responseError: function(response) {
+                  if (response.status === 401)
+                        $location.url('/login');
+                  return $q.reject(response);
+            }
+      };
 });
 ```
 > - created a function to checkLoggedin. Then to secure a URL, we simply add this new function to the configuration of the route.  
