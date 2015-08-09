@@ -38,7 +38,7 @@ gulp.task('build-css', ['csslint'], function() {
 
 gulp.task('lint', ['csslint', 'jslint']);
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build-js', 'build-css'], function() {
   gulp.watch('client/js/**/*.js', ['build-js']);
   gulp.watch('client/css/**/*.css', ['build-css']);
 });
