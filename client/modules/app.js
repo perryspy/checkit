@@ -1,5 +1,5 @@
 var app = angular.module('checkit',
-  ['ngResource', 'ui.router']);
+  ['ui.router', 'note']);
 
 app.config([
   '$stateProvider', '$urlRouterProvider',
