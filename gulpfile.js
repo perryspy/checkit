@@ -13,7 +13,7 @@ gulp.task('jslint' , function() {
 });
 
 gulp.task('build-js', ['jslint'], function() {
-  return gulp.src('client/js/**/*.js')
+  return gulp.src('client/modules/**/*.js')
     .pipe(plugins.sourcemaps.init())  // process the original sources
       .pipe(plugins.concat('scripts.min.js'))
       .pipe(gutil.env.type === 'production' ? plugins.ugilify() : gutil.noop())
@@ -39,7 +39,7 @@ gulp.task('build-css', ['csslint'], function() {
 gulp.task('lint', ['csslint', 'jslint']);
 
 gulp.task('watch', function() {
-  gulp.watch('client/js/**/*.js', ['build-js']);
+  gulp.watch('client/modules/**/*.js', ['build-js']);
   gulp.watch('client/css/**/*.css', ['build-css']);
 });
 

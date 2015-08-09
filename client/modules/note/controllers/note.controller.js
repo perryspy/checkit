@@ -1,13 +1,13 @@
-var app = angular.module('checkit');
+var module = angular.module('note');
 
-app.controller('CheckitCtrl', [
+module.controller('CheckitCtrl', [
     '$scope', '$http', 'Note',
     function($scope, $http, Note) {
-        
+
         $scope.getNotes = function() {
             $scope.notes = Note.query();
         };
-        
+
         $scope.createNote = function() {
             // Create a new instance of the Resource
             var note = new Note({

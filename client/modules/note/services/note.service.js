@@ -1,6 +1,6 @@
-var app = angular.module('checkit');
+var module = angular.module('note');
 
-app.factory('Note', [
+module.factory('Note', [
     '$resource',
     function($resource) {
         return $resource('/api/notes/:noteId',
