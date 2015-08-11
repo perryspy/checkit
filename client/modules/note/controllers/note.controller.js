@@ -1,8 +1,12 @@
 var module = angular.module('note');
 
 module.controller('CheckitCtrl', [
-    '$scope', '$http', 'Note',
-    function($scope, $http, Note) {
+    '$scope', '$state', '$http', 'Note', 'UserService',
+    function($scope, $state, $http, Note, UserService) {
+
+        if(!UserService.isLoggedIn()) {
+          $state.go('login');
+        }
 
         $scope.getNotes = function() {
             $scope.notes = Note.query();
@@ -55,6 +59,10 @@ module.controller('CheckitCtrl', [
             });
         };
 
+        $scope.logOut = function() {
+          UserService.logOut();
+          $state.go('login');
+        }
 
     }
 ]);

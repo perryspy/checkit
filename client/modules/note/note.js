@@ -1,1 +1,1 @@
-var module = angular.module('note', ['ngResource']);
+var module = angular.module('note', ['ngResource', 'user']);

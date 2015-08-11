@@ -9,11 +9,7 @@ var UserSchema = new mongoose.Schema({
     unique: true
   },
   hash: String,
-  salt: String,
-  notes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Note'
-  }]
+  salt: String
 });
 
 UserSchema.methods.setPassword = function (password) {

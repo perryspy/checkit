@@ -8,11 +8,11 @@ module.factory('UserService', [
     service.storageKey = 'checkit';
 
     service.saveToken = function(token) {
-      $window.localStorage[storageKey] = token;
+      $window.localStorage[service.storageKey] = token;
     };
 
     service.getToken = function() {
-      return $window.localStorage[storageKey];
+      return $window.localStorage[service.storageKey];
     };
 
     function getPayload(token) {
@@ -23,7 +23,7 @@ module.factory('UserService', [
       // if they don't pass in a token, find it
       // might do double look ups if a token is undefined to begin with
       if (token === undefined) {
-        token = auth.getToken();
+        token = service.getToken();
       }
 
       if (token) {
@@ -48,19 +48,19 @@ module.factory('UserService', [
     service.register = function(user) {
       return $http.post('/api/register', user)
         .success(function(response) {
-          auth.saveToken(response.token);
+          service.saveToken(response.token);
         });
     };
 
-    service.login = function(user) {
+    service.logIn = function(user) {
       return $http.post('/api/login', user)
         .success(function(response) {
-          auth.saveToken(response.token);
+          service.saveToken(response.token);
         });
     };
 
     service.logOut = function() {
-      $window.localStorage.removeItem(storageKey);
+      $window.localStorage.removeItem(service.storageKey);
     };
 
     return service;
