@@ -10,6 +10,10 @@ module.factory('AuthTokenService', [
       return $window.localStorage.getItem('token');
     };
 
+    service.getPayload = function(token) {
+      return JSON.parse($window.atob(token.split('.')[1]));
+    };
+
     // function to set token or clear token
     // if token is passed, set the token
     // if there is no token, clear it from local storage

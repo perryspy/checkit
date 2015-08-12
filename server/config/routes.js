@@ -19,7 +19,7 @@ module.exports = function(app) {
 
 	app.route('/api/login')
 		.post(UserController.login);
-	
+
 	// if none of the other routes are matched, default route
 	app.get('*', function(req, res) {
 		res.sendFile('client/index.html');

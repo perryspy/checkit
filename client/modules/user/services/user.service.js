@@ -5,10 +5,6 @@ module.factory('UserService', [
   function($http, AuthTokenService) {
     var service = {};
 
-    function getPayload(token) {
-      return JSON.parse($window.atob(token.split('.')[1]));
-    }
-
     service.isLoggedIn = function(token) {
       // if they don't pass in a token, find it
       // might do double look ups if a token is undefined to begin with
@@ -17,7 +13,7 @@ module.factory('UserService', [
       }
 
       if (token) {
-        var payload = getPayload(token);
+        var payload = AuthTokenService.getPayload(token);
 
         if (payload.exp > Date.now() / 1000) {
           return true;
@@ -36,7 +32,7 @@ module.factory('UserService', [
       var token = AuthTokenService.getToken();
 
       if (auth.isLoggedIn(token)) {
-        var payload = getPayload(token);
+        var payload = AuthTokenService.getPayload(token);
 
         return payload.username;
       }
@@ -45,19 +41,19 @@ module.factory('UserService', [
     service.register = function(user) {
       return $http.post('/api/register', user)
         .success(function(response) {
-          AuthTokenService.saveToken(response.token);
+          AuthTokenService.setToken(response.token);
         });
     };
 
     service.logIn = function(user) {
       return $http.post('/api/login', user)
         .success(function(response) {
-          AuthTokenService.saveToken(response.token);
+          AuthTokenService.setToken(response.token);
         });
     };
 
     service.logOut = function() {
-      AuthTokenServices.setToken();
+      AuthTokenService.setToken();
     };
 
     return service;

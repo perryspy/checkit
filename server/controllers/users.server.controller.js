@@ -9,7 +9,7 @@ var _ = require('lodash');
 exports.register = function(req, res, next) {
   if (!req.body.username || !req.body.password) {
     return res.status(400).json({
-      message: 'Please fill out all fileds'
+      message: 'Please fill out all fields'
     });
   }
 
@@ -31,7 +31,7 @@ exports.register = function(req, res, next) {
 exports.login = function(req, res, next) {
   if (!req.body.username || !req.body.password) {
     return res.status(400).json({
-      message: 'Please fill out all fileds'
+      message: 'Please fill out all fields'
     });
   }
 
