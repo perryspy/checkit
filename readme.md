@@ -1,7 +1,9 @@
 
 ## Getting started
 1. `npm install`
-2. `npm start`
+2. `mongod`
+  * starts the local database
+3. `npm start`
 
 ## Getting started - Dev
 1. `npm install`
