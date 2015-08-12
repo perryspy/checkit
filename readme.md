@@ -12,4 +12,4 @@
   * starts the local database
 3. `gulp`
   * starts the server using nodemon
-  * this in turn watches files as well
+  * this in turn watches files for updates and rebuilds
