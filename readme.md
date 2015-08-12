@@ -8,8 +8,6 @@
   * installs all needed npm modules, bower packages, and does an initial build of our JS and CSS files.
 2. `mongod`
   * starts the local database
-3. `gulp watch`
-  * since our js files are minified to a single file, this ensures your updates make it to the site
-4. `nodemon server.js`
-  * allows us to make changes on the server, without restarting it every time.
-
+3. `gulp`
+  * starts the server using nodemon
+  * this in turn watches files as well
