@@ -3,7 +3,7 @@ module.exports = function(app) {
 	var UserController = require('../controllers/users.server.controller');
 
 	app.route('/api/notes')
-		.get(NoteController.list)
+		.get(UserController.verifyToken, NoteController.list)
 		.post(NoteController.create)
 		.delete(NoteController.purge);
 

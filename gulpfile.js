@@ -2,7 +2,7 @@ var gulp = require('gulp'),
   gutil   = require('gulp-util'),
   plugins = require('gulp-load-plugins')();
 
-gulp.task('default', ['nodemon']);
+gulp.task('default', ['build']);
 
 gulp.task('build', ['build-js', 'build-css']);
 
