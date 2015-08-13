@@ -16,3 +16,10 @@ app.config([
     $urlRouterProvider.otherwise(defaultRoute);
   }
 ]);
+
+app.controller("mainController", [
+  '$scope',
+  function($scope) {
+    
+  }
+]);
