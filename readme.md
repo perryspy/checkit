@@ -10,6 +10,7 @@
   * installs all needed npm modules, bower packages, and does an initial build of our JS and CSS files.
 2. `mongod`
   * starts the local database
-3. `gulp`
-  * starts the server using nodemon
-  * this in turn watches files for updates and rebuilds
+3. `gulp watch`
+  * watches files for updates and rebuilds the minified concatenated version
+4. 'nodemon server.js'
+  * starts the server, and also restarts it whenever there are server changes.
