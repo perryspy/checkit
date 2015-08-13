@@ -1,6 +1,6 @@
-var module = angular.module('user');
+var module = angular.module('auth');
 
-module.factory('UserService', [
+module.factory('AuthService', [
   '$http', 'AuthTokenService',
   function($http, AuthTokenService) {
     var service = {};

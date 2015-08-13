@@ -1,4 +1,4 @@
-var module = angular.module('user');
+var module = angular.module('auth');
 
 module.factory('AuthTokenService', [
   '$window',
