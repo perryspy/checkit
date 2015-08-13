@@ -33,8 +33,6 @@ app.config([
 app.controller('MainController', [
   '$scope', '$state', 'AuthService',
   function($scope, $state, AuthService) {
-    console.log('loading main controller');
-
     $scope.user = {};
 
     $scope.register = function() {
@@ -59,14 +57,11 @@ app.controller('MainController', [
 
     $scope.logOut = function() {
       AuthService.logOut();
+      $state.go('login');
     };
 
     $scope.isLoggedIn = function() {
-      var result = AuthService.isLoggedIn();
-
-      console.log('Logged IN: ', result);
-
-      return result;
+      return AuthService.isLoggedIn();
     };
   }
 ]);
