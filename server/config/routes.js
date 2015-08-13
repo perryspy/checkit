@@ -4,12 +4,12 @@ module.exports = function(app) {
 
 	app.route('/api/notes')
 		.get(UserController.verifyToken, NoteController.list)
-		.post(NoteController.create)
+		.post(UserController.verifyToken, NoteController.create)
 		.delete(NoteController.purge);
 
 	app.route('/api/notes/:noteId')
 		.get(NoteController.read)
-		.put(NoteController.update)
+		.put(UserController.verifyToken, NoteController.update)
 		.delete(NoteController.destroy);
 
 	app.param('noteId', NoteController.noteById);
