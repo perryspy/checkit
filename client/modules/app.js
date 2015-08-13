@@ -14,12 +14,12 @@ app.config([
       })
       .state('login', {
         url: '/login',
-        templateUrl: 'modules/user/templates/login.html',
+        templateUrl: 'modules/auth/templates/login.html',
         controller: 'MainController'
       })
       .state('register', {
         url: '/register',
-        templateUrl: 'modules/user/templates/register.html',
+        templateUrl: 'modules/auth/templates/register.html',
         controller: 'MainController'
       });
 

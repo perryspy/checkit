@@ -2,7 +2,7 @@ var module = angular.module('auth');
 
 module.factory('AuthInterceptor', [
   '$q', '$location', 'AuthTokenService',
-  function($q, $state, AuthTokenService) {
+  function($q, $location, AuthTokenService) {
     var service = {};
 
     // this will happen on all HTTP requests
@@ -22,7 +22,7 @@ module.factory('AuthInterceptor', [
     service.responseError = function(response) {
       // if our server returns 403 forbidden response
       if (response.status == 403) {
-        $state.go('login');
+        $location.path('#/login');
       }
 
       // return the errors from the server as a promise
