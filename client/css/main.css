@@ -27,3 +27,7 @@
 .note:hover .delete-note-button {
 	display: block;
 }
+
+#appName {
+	cursor: pointer;
+}

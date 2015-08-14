@@ -4,7 +4,7 @@ var app = angular.module('checkit',
 app.config([
   '$stateProvider', '$urlRouterProvider', '$httpProvider',
   function($stateProvider, $urlRouterProvider, $httpProvider) {
-    var defaultRoute = 'login';
+    var defaultRoute = 'checkit';
 
     $stateProvider
       .state('checkit', {
@@ -31,9 +31,22 @@ app.config([
 ]);
 
 app.controller('MainController', [
-  '$scope', '$state', 'AuthService',
-  function($scope, $state, AuthService) {
+  '$scope', '$state', '$location', 'AuthService',
+  function($scope, $state, $location, AuthService) {
     $scope.user = {};
+
+    _init();
+    function _init() {
+      // Checked if logged in, if not register guest
+      if (!AuthService.isLoggedIn() && !AuthService.isGuest()) {
+        AuthService.registerGuest()
+          .error(function(error) {
+            $scope.error = error;
+          })
+          .then(function() {
+          });
+      }
+    }
 
     $scope.register = function() {
       AuthService.register($scope.user)
@@ -62,6 +75,10 @@ app.controller('MainController', [
 
     $scope.isLoggedIn = function() {
       return AuthService.isLoggedIn();
+    };
+
+    $scope.go = function(path) {
+      $location.path(path);
     };
   }
 ]);

@@ -17,6 +17,9 @@ module.exports = function(app) {
 	app.route('/api/register')
 		.post(UserController.register);
 
+	app.route('/api/registerGuest')
+		.post(UserController.registerGuest);
+
 	app.route('/api/login')
 		.post(UserController.login);
 

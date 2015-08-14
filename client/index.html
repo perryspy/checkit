@@ -12,8 +12,8 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 
-      <div class="page-header">
-        <div id="profileActions" class="right" ng-controller="MainController">
+      <div class="page-header"  ng-controller="MainController">
+        <div id="profileActions" class="pull-right">
           <div id="login" ng-if="!isLoggedIn()">
             <a href="#/login">Login</a> | <a href="#/register">Register</a>
           </div>
@@ -21,7 +21,7 @@
             <button class="btn btn-info" ng-click="logOut()">Log Out</button>
           </div>
         </div>
-        <h1>CheckIt</h1>
+        <h1 id="appName" ng-click="go('#/checkit')">CheckIt</h1>
       </div>
 
       <ui-view></ui-view>

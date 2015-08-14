@@ -52,6 +52,20 @@ exports.login = function(req, res, next) {
   })(req, res, next);
 };
 
+exports.registerGuest = function(req, res, next) {
+  var user = new User();
+
+  user.save(function(err) {
+    if (err) {
+      return next(err);
+    }
+
+    return res.json({
+      token: user.generateJWT()
+    });
+  });
+};
+
 // route middleware to verify a token
 exports.verifyToken = function(req, res, next) {
   // check header or url parameters or post parameters for token
