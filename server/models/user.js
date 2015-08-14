@@ -28,17 +28,24 @@ UserSchema.methods.isValidPassword = function (password) {
 // Should probably set this as an environment variable
 var tokenSecret = 'SECRET';
 
-UserSchema.methods.generateJWT = function () {
-  // set expiration to 60 days
-  var exp = new Date();
-  exp.setDate(exp.getDate() + 60);
+UserSchema.methods.generateJWT = function (days) {
 
-  return jwt.sign({
+  var tokenize = {
     _id: this._id,
     username: this.username
-  }, config.appSecret, {
-    expiresInMinutes: 4320  // expires in 3 days
-  });
+  };
+
+  // set expiration to 60 days
+  if (days !== undefined) {
+    var exp = new Date();
+    exp.setDate(exp.getDate() + days);
+
+    tokenize.exp = parseInt(exp.getTime() / 1000);
+  } else {
+    tokenize.guest = true;
+  }
+
+  return jwt.sign(tokenize, config.appSecret, {});
 };
 
 module.exports = mongoose.model('User', UserSchema);

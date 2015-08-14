@@ -15,11 +15,11 @@ module.factory('AuthService', [
       if (token) {
         var payload = AuthTokenService.getPayload(token);
 
-        if (payload.exp > Date.now() / 1000) {
+        if (payload.exp === undefined || payload.exp > Date.now() / 1000) {
           return true;
         } else {
           // the token has expired, remove it
-          AuthTokenServices.setToken();
+          AuthTokenService.setToken();
 
           return false;
         }
