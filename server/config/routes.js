@@ -14,11 +14,11 @@ module.exports = function(app) {
 
 	app.param('noteId', NoteController.noteById);
 
-	app.route('/api/register')
-		.post(UserController.register);
-
 	app.route('/api/registerGuest')
 		.post(UserController.registerGuest);
+
+	app.route('/api/register')
+		.post(UserController.findUserFromToken, UserController.register);
 
 	app.route('/api/login')
 		.post(UserController.login);

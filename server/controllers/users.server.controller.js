@@ -8,14 +8,23 @@ var _ = require('lodash');
 
 var config = require('../config/config');
 
-exports.register = function(req, res, next) {
+exports.register = function(req, res) {
   if (!req.body.username || !req.body.password) {
     return res.status(400).json({
       message: 'Please fill out all fields'
     });
   }
 
-  var user = new User();
+  // grab the user from the request
+  var user = req.user;
+
+  if (!user) {
+    console.log('no user found on req.');
+
+    // if none was provided, make a new one
+    user = new User();
+  }
+
   user.username = req.body.username;
   user.setPassword(req.body.password);
 
@@ -30,7 +39,7 @@ exports.register = function(req, res, next) {
   });
 };
 
-exports.login = function(req, res, next) {
+exports.login = function(req, res) {
   if (!req.body.username || !req.body.password) {
     return res.status(400).json({
       message: 'Please fill out all fields'
@@ -52,24 +61,33 @@ exports.login = function(req, res, next) {
   })(req, res, next);
 };
 
-exports.registerGuest = function(req, res, next) {
+exports.registerGuest = function(req, res) {
   var user = new User();
 
   user.save(function(err) {
     if (err) {
       return next(err);
-    }
+    } else {
+      console.log('Guest created: ', user);
 
-    return res.json({
-      token: user.generateJWT()
-    });
+      return res.json({
+        token: user.generateJWT()
+      });
+    }
   });
+};
+
+function getToken(req) {
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  return token;
 };
 
 // route middleware to verify a token
 exports.verifyToken = function(req, res, next) {
-  // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  // get the token from the request
+  var token = getToken(req);
 
   // decode token
   if (token) {
@@ -113,5 +131,47 @@ exports.verifyToken = function(req, res, next) {
       success: false,
       message: 'No token provided.'
     });
+  }
+};
+
+exports.findUserFromToken = function(req, res, next) {
+  // get the token from the request
+  var token = getToken(req);
+
+  console.log('token: ', token);
+
+  // decode token
+  if (token) {
+    console.log('got token');
+
+    // verifies secret and checks expires
+    jwt.verify(token, config.appSecret, function(err, decoded) {
+      if (!err) {
+        console.log('token: ', decoded);
+
+        // Look up user from token
+        User.findOne({ _id: decoded._id}, function(err, user) {
+          console.log('err: ', err);
+          console.log('user: ', user);
+
+          if (!err && user) {
+            console.log('user found: ', user)
+
+            // add the user to the request object for future
+            req.user = user;
+
+            return next();
+          } else {
+            return next();
+          }
+        });
+      } else {
+        console.log('error with token: ', err);
+
+        return next();
+      }
+    });
+  } else {
+    return next();
   }
 };
