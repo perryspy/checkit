@@ -21,7 +21,7 @@ module.factory('AuthService', [
           return true;
         } else {
           // the token has expired, remove it
-          // AuthTokenService.setToken();
+          AuthTokenService.setToken();
 
           return false;
         }
