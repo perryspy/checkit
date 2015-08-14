@@ -19,8 +19,6 @@ exports.register = function(req, res) {
   var user = req.user;
 
   if (!user) {
-    console.log('no user found on req.');
-
     // if none was provided, make a new one
     user = new User();
   }
@@ -39,7 +37,7 @@ exports.register = function(req, res) {
   });
 };
 
-exports.login = function(req, res) {
+exports.login = function(req, res, next) {
   if (!req.body.username || !req.body.password) {
     return res.status(400).json({
       message: 'Please fill out all fields'
@@ -68,8 +66,6 @@ exports.registerGuest = function(req, res) {
     if (err) {
       return next(err);
     } else {
-      console.log('Guest created: ', user);
-
       return res.json({
         token: user.generateJWT()
       });
@@ -138,25 +134,14 @@ exports.findUserFromToken = function(req, res, next) {
   // get the token from the request
   var token = getToken(req);
 
-  console.log('token: ', token);
-
   // decode token
   if (token) {
-    console.log('got token');
-
     // verifies secret and checks expires
     jwt.verify(token, config.appSecret, function(err, decoded) {
       if (!err) {
-        console.log('token: ', decoded);
-
         // Look up user from token
         User.findOne({ _id: decoded._id}, function(err, user) {
-          console.log('err: ', err);
-          console.log('user: ', user);
-
           if (!err && user) {
-            console.log('user found: ', user)
-
             // add the user to the request object for future
             req.user = user;
 
@@ -166,8 +151,6 @@ exports.findUserFromToken = function(req, res, next) {
           }
         });
       } else {
-        console.log('error with token: ', err);
-
         return next();
       }
     });
