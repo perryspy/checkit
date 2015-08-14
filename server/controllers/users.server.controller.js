@@ -25,7 +25,7 @@ exports.register = function(req, res, next) {
     }
 
     return res.json({
-      token: user.generateJWT()
+      token: user.generateJWT(3)
     });
   });
 };
@@ -44,7 +44,7 @@ exports.login = function(req, res, next) {
 
     if (user) {
       return res.json({
-        token: user.generateJWT()
+        token: user.generateJWT(3)
       })
     } else {
       return res.status(401).json(info);
