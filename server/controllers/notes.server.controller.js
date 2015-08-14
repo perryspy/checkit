@@ -19,7 +19,7 @@ exports.list = function(req, res) {
 
 exports.create = function(req, res) {
 	var note = new Note(req.body);
-	note.user = req.token._id;
+	note.user = req.user;
 
 	note.save(function(err, note) {
 		if (err) { res.send(err); }
