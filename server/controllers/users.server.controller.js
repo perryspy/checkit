@@ -81,9 +81,29 @@ exports.verifyToken = function(req, res, next) {
           message: 'Failed to authenticate token.'
         });
       } else {
-        // if everything is good, save to request for use in other routes
-        req.token = decoded;
-        next();
+        // Look up user from token
+        User.findOne({ _id: decoded._id}, function(err, user) {
+          if (err) {
+            return res.status(403).send({
+              success: false,
+              message: 'Invalid token.'
+            });
+          }
+
+          // check to see if a user was found
+          if (!user) {
+            return res.status(403).send({
+              success: false,
+              message: 'User not found.'
+            });
+          }
+
+          // add the user to the request object for future
+          req.user = user;
+
+          // add to request
+          next();
+        });
       }
     });
   } else {
