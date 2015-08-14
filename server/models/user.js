@@ -35,10 +35,9 @@ UserSchema.methods.generateJWT = function () {
 
   return jwt.sign({
     _id: this._id,
-    username: this.username
-  }, config.appSecret, {
-    expiresInMinutes: 4320  // expires in 3 days
-  });
+    username: this.username,
+    exp: parseInt(exp.getTime() / 1000)
+  }, config.appSecret, {});
 };
 
 module.exports = mongoose.model('User', UserSchema);
