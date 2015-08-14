@@ -1,5 +1,9 @@
 # How PassportJS was used
 
+> I've followed the example of the [Thinkster.io tutorial](https://thinkster.io/mean-stack-tutorial/), which uses passport to
+lock down the API on the server, and then JSON WebTokens for auth on the client
+side. Currently it only has passport local. Going to read through the [scotch.io tutorial](https://scotch.io/courses/easy-node-authentication) to figure out how to add oAuth from social networks
+
 ---
 
 I'll link any links I found useful, plus any lessons learned.

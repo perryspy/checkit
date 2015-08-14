@@ -1,8 +1,8 @@
 var module = angular.module('note');
 
 module.controller('CheckitCtrl', [
-    '$scope', '$http', 'Note',
-    function($scope, $http, Note) {
+    '$scope', '$state', '$http', 'Note',
+    function($scope, $state, $http, Note) {
 
         $scope.getNotes = function() {
             $scope.notes = Note.query();
@@ -54,7 +54,5 @@ module.controller('CheckitCtrl', [
             }, function(errorResponse) {
             });
         };
-
-
     }
 ]);
