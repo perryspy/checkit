@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
   gutil   = require('gulp-util'),
   plugins = require('gulp-load-plugins')();
-  
+
 gulp.task('default', ['build']);
 
 gulp.task('build', ['build-js', 'build-css']);
@@ -28,7 +28,7 @@ gulp.task('csslint', function() {
 });
 
 gulp.task('build-css', ['csslint'], function() {
-  return gulp.src('client/css/**/*.css')
+  return gulp.src('client/assets/css/**/*.css')
     .pipe(plugins.sourcemaps.init())  // process the original sources
       .pipe(plugins.concatCss('main.min.css'))
       .pipe(gutil.env.type === 'production' ? plugins.cssmin() : gutil.noop())
@@ -40,7 +40,7 @@ gulp.task('lint', ['csslint', 'jslint']);
 
 gulp.task('watch', function() {
   gulp.watch('client/modules/**/*.js', ['build-js']);
-  gulp.watch('client/css/**/*.css', ['build-css']);
+  gulp.watch('client/assets/css/**/*.css', ['build-css']);
 });
 
 gulp.task('nodemon', function() {
