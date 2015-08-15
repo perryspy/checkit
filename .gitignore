@@ -2,7 +2,7 @@ node_modules
 *.log
 
 .idea/
-client/lib
+client/assets/lib
 
 client/*.min.*
 
