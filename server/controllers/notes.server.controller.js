@@ -2,22 +2,24 @@ var Note = require('./../models/Note');
 var _ = require('lodash');
 
 exports.list = function(req, res) {
-	if (req.token) {
-		Note.find({user: req.token._id}, function(err, notes) {
-			if (err) { res.send(err); }
-			res.json(notes);
+	if (req.user) {
+		Note.find({ user: req.user }, function(err, notes) {
+			if (err) {
+				return res.send(err);
+			}
+			return res.json(notes);
 		});
 	} else {
 		return res.status(403).send({
       success: false,
-      message: 'No token provided.'
+      message: 'No user provided.'
     });
 	}
 };
 
 exports.create = function(req, res) {
 	var note = new Note(req.body);
-	note.user = req.token._id;
+	note.user = req.user;
 
 	note.save(function(err, note) {
 		if (err) { res.send(err); }
