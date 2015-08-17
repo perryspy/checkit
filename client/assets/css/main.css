@@ -31,3 +31,8 @@
 #appName {
 	cursor: pointer;
 }
+
+.note-checkbox {
+	width: 2%;
+	margin-top: 1rem;
+}
